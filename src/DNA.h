@@ -8,6 +8,7 @@
 #include<iostream>
 #include<math.h>
 #include<algorithm>    // std::random_shuffle
+#include<set>
 
 using namespace std;
 
@@ -30,7 +31,7 @@ class DNA {
         int length;
 
         DNA() {
-            fitness = 0;
+            fitness = -1;
             length = 0;
             distance = 0; 
         };
@@ -70,38 +71,54 @@ class DNA {
         */
         void calc_fitness(const vector<vector<double>> matrix_distance) {
             double fit = 0.0;
-        
-            // cout << genes << ' ' << target << endl;
             double sum = 0.0;
-            for(int i = 0; i < this->length; ++i) {
-                sum += matrix_distance[this->genes[i]-1][this->genes[(i + 1 ) % length]-1];
-            }
 
-            // cout << "End match\n";
+            for(int i = 0; i < this->length; ++i) {
+                sum += matrix_distance[this->genes[i]-1][this->genes[(i + 1 ) % this->length]-1];
+            }
+            
+            // update distance 
             this->distance = sum;
             this->fitness = 1 / (double)sum;
-            // cout << fitness << endl;
         }
 
         /*
             Mescle father and mother, generate a CHILD
         */
         DNA crossover(DNA partner) {
-            DNA child = DNA((int)this->genes.size());
+            DNA child = DNA();
+            set<int> new_route;
 
-            int threshould = int(rand()%(int)this->genes.size());
-            // cout << "Threshould test: " << threshould << endl;
+            int n1 = rand() % this->length,
+                n2 = rand() % (this->length - n1) + n1; 
 
-            for(int i = 0; i < (int)this->genes.size(); ++i) {
-                if(i > threshould) child.genes[i] = partner.genes[i];
-                else child.genes[i] = this->genes[i]; 
+            // Copy a slice of (n1, n2) to child
+            for(int i = n1; i < n2; ++i) {
+                child.genes.push_back(this->genes[i]);
+                new_route.insert(this->genes[i]);
             }
-            // cout << "Pass crossover\n";
-            // Return the new child
+
+            // The gap is how many gene is missing in child
+            int gap = this->length - (child.length);
+
+            // Fill gap with genes partner 
+            for(int i = 0; i < (int)partner.length; ++i) {
+                if(new_route.find(partner.genes[i]) == new_route.end()) {
+                    new_route.insert(partner.genes[i]);
+                    child.genes.push_back(partner.genes[i]);
+                }
+            }
+            child.length = this->length;
+            
+            // Clean set
+            new_route.clear();
+
             return child;
         }
 
-        // Chance of a gene suffer a mutation
+        /*
+            Chance of a gene suffer a mutation
+        */
         void mutate(const double& fitness_avg, const double& fitness_max) {
             for(int i = 0; i < genes.size(); ++i) {
                 double p = P_MAX * (P_MAX - P_MIN) * (fitness - fitness_avg) / (fitness_max - fitness_avg);
@@ -109,9 +126,17 @@ class DNA {
                      int n1 = rand() % length,
                          n2 = rand() % length; 
                     swap(genes[n1], genes[n2]);
+                }
             }
-        }
-  }
+
+    }
+
+    /*
+        Destructot
+    */
+    ~DNA() {
+        this->genes.clear();
+    }
 };
 
 

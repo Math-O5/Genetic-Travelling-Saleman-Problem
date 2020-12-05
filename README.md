@@ -1,19 +1,23 @@
 # Genetic-Travelling-Saleman-Problem
 GTSP improved
 
-## TSP (O Caixeiro Viajante)
-Este problema consiste em encontrar a menor rota(tour) que visite todas cidades uma vez a partir de uma cidade inicial e termine nessa mesma cidade.
-A solução proposta aqui é a implementação de um algoritmo evolutivo, baseiado na teoria da evolução, em que individuos mais adaptados possuem mais probabilidade para sobreviverem. 
+## O problem: TSP (O Caixeiro Viajante)
+Este problema consiste em encontrar a menor rota(tour) que visite todas cidades uma vez a partir de uma cidade inicial e termine nessa mesma cidade. Essa rota é descreve também um ciclo halmiltoniano simples. 
+
+## Soluçãp
+A solução proposta aqui é a implementação de um algoritmo evolutivo, baseiado na teoria da evolução, em que individuos mais adaptados possuem mais probabilidade para sobreviverem. Esse algoritmo gerará uma heuristica que buscará a resposta certa usando dos individuos que mais se aproximarem de um caminho curto, sem sub-ciclos, descartando os piores e gerando novos.  
 
 ## Descrição formal
-Cada cidade pode ser representada por um vértice V(i), e o custo de viajar entre duas cidades pela aresta D(V(i), V(j)). Temos n cidades e o conjunto de cidades é P(X) = {V(1), V(2), ..., V(n)} e X = {1, 2, ..., n}
+Cada cidade pode ser representada por um vértice V(i), e o custo de viajar entre duas cidades pela aresta D(V(i), V(j)). Temos n cidades e uma rota é descrita como P(X) = {V(1), V(2), ..., V(n)} e X = {1, 2, ..., n}. 
 
 ## Função objetivo
-A rota deve apresentar a menor soma de todas arestas, ou seja, a  soma das arestas adjancetes, portanto:
+A rota deve apresentar a menor soma de todas arestas, em outras palavras, a  soma das arestas adjancetes.
+
+Portanto, queremos minimizar: 
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=T_d&space;=&space;\sum_{i=1}^n&space;D(V_i,&space;V_{(i&plus;1)%n})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?T_d&space;=&space;\sum_{i=1}^n&space;D(V_i,&space;V_{(i&plus;1)%n})" title="T_d = \sum_{i=1}^n D(V_i, V_{(i+1)%n})" /></a>
 
-Note que o ultimo index (i + 1) % n corresponde ao caso de quando (i + 1) = (n + 1), então (n + 1) % n = 1.
+Note que o ultimo index (i + 1) % n corresponde ao caso de quando (i + 1) = (n + 1), então (n + 1) % n = 1. Além disso, em um caso real não sabemos se atingimos a solução ótima
 
 ## Iniciando População
 
@@ -31,8 +35,9 @@ Note que o ultimo index (i + 1) % n corresponde ao caso de quando (i + 1) = (n +
 
 ## Autores
 
-<a href="https://github.com/Math-O5">Simões Eduardo</a> 
-<a href="https://github.com/AlbertWolf99">Simões Eduardo</a> 
+<a href="https://github.com/Math-O5">Mathias Fernandes (Math-O5)</a> 
+
+<a href="https://github.com/AlbertWolf99">Alberto Wolf (Alberto99)</a> 
 
 ## Agradecimentos
 

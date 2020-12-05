@@ -1,5 +1,5 @@
 /*
-    Version in c++ of the shakespere from Natural of the Code
+    Genetic Traveling Salesman Problem
     reference: https://aip.scitation.org/doi/pdf/10.1063/1.5039131
 */
 #include <iostream>
@@ -7,6 +7,9 @@
 #include "population.h"
 
 using namespace std;
+
+const int MAX_N = 10;
+const int MAX_GEN = 100;
 
 /*
     Generate population
@@ -24,9 +27,9 @@ Population createPopulation(const vector<vector<double>>& matrix, int popmax, in
 /*
 */
 void run(Population population) {
-    int i = 0, max_gen = 2;
-
-    while(i++ < max_gen) {
+    
+    int i = 0;
+    while(i < MAX_GEN) {
         cout << "Generation: " << population.generation << endl;
         cout << "Calculate fitness\n";
         
@@ -37,7 +40,10 @@ void run(Population population) {
         // Select actual population
         population.selection();
         cout << "Best fitniss: " << population.best_individual.fitness << endl;
-        cout << "Length: " << population.best_individual.distance << endl;
+        for(int j =0; j < population.best_individual.length; ++j)
+            cout << population.best_individual.genes[j] << ' ';
+        cout << endl;
+        cout << "Distance: " << population.best_individual.distance << endl;
 
         // Reproduction of new life, called also sex
         population.generate();
@@ -47,32 +53,33 @@ void run(Population population) {
         //     cout << "End of Evolution" << endl;
         //     return;
         // }
+
+        i += 1;
     }   
 }
 
-const int MAX_N = 10;
 vector<vector<double>> load_distance_matrix() {
     vector<vector<double>> matrix(MAX_N, vector<double>(MAX_N));
 
     for(int i = 0; i < 10; ++i) {
         vector<double> row;
-        for(int j = 0; j < 10; ++j) {
-            if(i != j)
-                row.push_back(j);
-            else row.push_back(MAX_N*10);
+        for(int j = i; j < 10; ++j) {
+            if(i != j) {
+                matrix[i][j] = i + 1;
+                matrix[j][i] = i + 1;
+            }
+            else matrix[i][j] = MAX_N*10;
         }
-        matrix[i] = row;
     }
 
     // read matrix
     return matrix;
 }
 
-// will be deleted 
 int main() {
     vector<vector<double>> matrix = load_distance_matrix();
-    int popmax = 7;
-    int elite = 5;
+    int popmax = 800;
+    int elite = 300;
     
     for(int i = 0; i < 10; ++i) {
         for(int j = 0; j < 10; ++j) {
@@ -87,6 +94,9 @@ int main() {
     
     // Run life
     run(population);
+
+    for(int i = 0; i < 10; ++i)
+        matrix[i].clear();
     
     return 0;
 }
