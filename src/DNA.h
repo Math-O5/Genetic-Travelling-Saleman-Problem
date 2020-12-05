@@ -2,6 +2,7 @@
 #define DNA_H
 
 #include<string>
+#include<vector>
 #include<stdlib.h>     /* srand, rand */
 #include<time.h>       /* time */
 #include<iostream>
@@ -9,6 +10,9 @@
 #include<algorithm>    // std::random_shuffle
 
 using namespace std;
+
+const double P_MAX = 0.05;
+const double P_MIN = 0.01;
 
 // random generator function:
 int random_number(int i) { 
@@ -22,22 +26,25 @@ int random_number(int i) {
 class DNA { 
     public:
         vector<int> genes; // tour
-        double fitness;
+        double fitness, distance;
         int length;
 
         DNA() {
             fitness = 0;
             length = 0;
+            distance = 0; 
         };
 
         DNA(const DNA& dna) {
             this->genes = dna.genes;
             this->fitness = dna.fitness;
             this->length = dna.length;
+            this->distance = dna.distance;
         };
 
         DNA(int length) {
             this->fitness = 0;
+            this->distance = -1; // no defined
             this->genes = new_tour(length);
             this->length = length;
         }
@@ -46,14 +53,14 @@ class DNA {
             vector<int> tour;
 
             // set default tour sequencial
-            for (int i = 1; i < n; ++i)
+            for (int i = 1; i <= n; ++i)
                 tour.push_back(i); // 1 2 ... n
 
             // using built-in random generator:
             random_shuffle(tour.begin(), tour.end());
 
             // using myrandom:
-            random_shuffle ( tour.begin(), tour.end(), random_number;
+            random_shuffle ( tour.begin(), tour.end(), random_number);
 
             return tour;   
         }
@@ -67,14 +74,18 @@ class DNA {
             // cout << genes << ' ' << target << endl;
             double sum = 0.0;
             for(int i = 0; i < this->length; ++i) {
-                sum += matrix_distance[this->genes[i]][this->genes[(i + 1 ) % length]];
+                sum += matrix_distance[this->genes[i]-1][this->genes[(i + 1 ) % length]-1];
             }
+
             // cout << "End match\n";
-            fitness = 1 / (double)sum;
+            this->distance = sum;
+            this->fitness = 1 / (double)sum;
             // cout << fitness << endl;
         }
 
-        // Mescle father and mother, generate a CHILD
+        /*
+            Mescle father and mother, generate a CHILD
+        */
         DNA crossover(DNA partner) {
             DNA child = DNA((int)this->genes.size());
 
@@ -91,10 +102,13 @@ class DNA {
         }
 
         // Chance of a gene suffer a mutation
-        void mutate(double mutationRate) {
+        void mutate(const double& fitness_avg, const double& fitness_max) {
             for(int i = 0; i < genes.size(); ++i) {
-                if (rand()/(double)RAND_MAX < mutationRate) {
-                    genes[i] = new_char();
+                double p = P_MAX * (P_MAX - P_MIN) * (fitness - fitness_avg) / (fitness_max - fitness_avg);
+                if (rand()/(double)RAND_MAX >=  p) {
+                     int n1 = rand() % length,
+                         n2 = rand() % length; 
+                    swap(genes[n1], genes[n2]);
             }
         }
   }
