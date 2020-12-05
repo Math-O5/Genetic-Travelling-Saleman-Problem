@@ -1,18 +1,13 @@
 #ifndef POPULATION_H
 #define POPULATION_H
-
+#include "DNA.h"
 #include<string>
 #include<vector>   
 #include <algorithm> // swap
-#include "DNA.h"
 
 using namespace std;
 
 const double PERFECT_SCORE = 1;
-
-bool sort_individuals(const DNA& ind_a, const DNA& ind_b) {
-    return (ind_a.fitness > ind_b.fitness);
-}
 
 /*
     Population is a collection of elements
@@ -45,6 +40,16 @@ class Population {
         /* initialize random seed: */
         void start_clock() {
             srand (time(NULL));
+        }
+
+        // Compare individual by fitness function compare
+        bool static sort_individuals(const DNA& ind_a, const DNA& ind_b) {
+            return (ind_a.fitness > ind_b.fitness);
+        }
+
+        // random generator function:
+        int random_number(int i) { 
+            return rand()%i;
         }
 
         /* Print fitness */

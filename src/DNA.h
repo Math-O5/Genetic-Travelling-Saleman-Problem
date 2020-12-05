@@ -15,11 +15,6 @@ using namespace std;
 const double P_MAX = 0.05;
 const double P_MIN = 0.01;
 
-// random generator function:
-int random_number(int i) { 
-    return rand()%i;
-}
-
 /*
     DNA is a collection genes.
     Genes is expreseed as tours
@@ -48,6 +43,11 @@ class DNA {
             this->distance = -1; // no defined
             this->genes = new_tour(length);
             this->length = length;
+        }
+
+        // random generator function:
+        int static random_number(int i) { 
+            return rand()%i;
         }
 
         vector<int> new_tour(int n) {
