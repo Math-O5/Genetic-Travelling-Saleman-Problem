@@ -1,8 +1,12 @@
 # Genetic-Travelling-Saleman-Problem
 GTSP improved
 
-## O problem: TSP (O Caixeiro Viajante)
+## O problema: TSP (O Caixeiro Viajante)
 Este problema consiste em encontrar a menor rota(tour) que visite todas cidades uma vez a partir de uma cidade inicial e termine nessa mesma cidade. Essa rota é descreve também um ciclo halmiltoniano simples. 
+
+## Execução
+
+Compile com: ```g++ g++ src/environment.cpp src/main.cpp -o gtsp``` e execute com ```./gtsp```
 
 ## Soluçãp
 A solução proposta aqui é a implementação de um algoritmo evolutivo, baseiado na teoria da evolução, em que individuos mais adaptados possuem mais probabilidade para sobreviverem. Esse algoritmo gerará uma heuristica que buscará a resposta certa usando dos individuos que mais se aproximarem de um caminho curto, sem sub-ciclos, descartando os piores e gerando novos.  
