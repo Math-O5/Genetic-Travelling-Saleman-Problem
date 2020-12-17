@@ -7,7 +7,7 @@
 using namespace std;
 
 /* Global definitions */
-const int MAX_N = 10;
+int N;
 const int MAX_GEN = 100;
 const int POPULATION_SIZE = 10;
 const int ELITE_SIZE = 1;
@@ -116,38 +116,26 @@ void env_run() {
 
 /**/
 vector<vector<double>> load_distance_matrix() {
-    vector<vector<double>> matrix(MAX_N, vector<double>(MAX_N));
     vector<pair<double,double>> pos;
-    double n, x, y;
-    string path, filename;
+    string path, filename, ext;
 
     path = "../data/";
     cin >> filename;
+    ext = ".txt";
 
     fstream my_file;
-    my_file.open(path + filename, ios::in);
-    my_file >> n;
+    my_file.open(path + filename + ext, ios::in);
+    my_file >> N;
 
-    while(!my_file.eof()){
-        for (int i = 0; i < n; i++){
-            my_file >> x >> y;
-            pos.push_back(make_pair(x, y));
+    vector<vector<double>> matrix(N, vector<double>(N));
+
+    for(int i = 0; i < N; i++){
+        for(int j = 0; j < N; j++){
+            my_file >> matrix[i][j]; 
         }
     }
-
+    
     my_file.close();
-
-    for(int i = 0; i < n; i++){
-        for(int j = i; j < n; j++){
-            if(i == j) matrix[i][i] = -1;
-            else{
-                double dist = sqrt(pow(pos[i].first - pos[j].first, 2) + pow(pos[i].second - pos[j].second, 2));
-                matrix[i][j] = dist;
-                matrix[j][i] = dist;
-            }
-            
-        }
-    }
 
     return matrix;
 }
