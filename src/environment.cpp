@@ -10,7 +10,7 @@ using namespace std;
 const int MAX_N = 10;
 const int MAX_GEN = 100;
 const int POPULATION_SIZE = 10;
-const int ELITE_SIZE = 0.3 * POPULATION_SIZE;
+const int ELITE_SIZE = 1;
 
 /*
     Generate population
@@ -46,8 +46,8 @@ void env_run() {
         
         // Classification: calculate all scores
         population.calc_fitness();
-        cout << "Evaluate the best crew\n";
 
+        cout << "Evaluate the best crew\n";
         // Select actual population
         population.selection();
         cout << "Best fitniss: " << population.best_individual.fitness << endl;
@@ -59,11 +59,6 @@ void env_run() {
         // Reproduction of new life, called also sex
         population.generate();
         cout << "Population sucessiful crossovered\n";
-        
-        // if(population.get_is_finish()) {
-        //     cout << "End of Evolution" << endl;
-        //     return;
-        // }
 
         i += 1;
     }

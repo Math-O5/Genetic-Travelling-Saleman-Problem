@@ -20,10 +20,9 @@ class Population {
     public:
         vector<vector<double>> distance_matrix;             
         double fitness_avg, fitness_max;
-        int popmax, generation, elite;
-        bool is_finish;
-        DNA best_individual;        // best individual at moment
-        vector<DNA> individuals;    // actual generation
+        int popmax, generation, elite;  
+        DNA best_individual;            // best individual at moment
+        vector<DNA> individuals;        // actual generation
 
         Population(const vector<vector<double>>& distance_matrix, int popmax, int elite) {
                 this->start_clock();
@@ -31,7 +30,6 @@ class Population {
                 this->popmax = popmax;
                 this->elite = elite;
                 generation = 0;
-                is_finish = false;
                 for(int i = 0; i < popmax; ++i) {
                     individuals.push_back(DNA((int)distance_matrix.size()));
                 }
@@ -61,9 +59,7 @@ class Population {
         }
 
         /*
-            Battle of bank corruping and luck
-
-            Forces of destination that can not be changed.  
+            This function ramdom swicth on elite individual with an elite one.
         */
         void tournament_of_two() {
             for(int i = 0; i < 2; ++i) {
@@ -83,12 +79,13 @@ class Population {
 
             // Sum all fitness 
             for(int i = 0; i < popmax; ++i) {
-                for(int j = 0; j < this->individuals[i].length; ++j) {
-                    cout << this->individuals[i].genes[j] << ' ';
-                }
-                cout << endl;              
+                // for(int j = 0; j < this->individuals[i].length; ++j) {
+                //     cout << this->individuals[i].genes[j] << ' ';
+                // }
+                // cout << endl;              
                 sum_fitness += this->individuals[i].fitness;
             }
+
             // Sort individuals by decrement fitness 
             sort(individuals.begin(), individuals.end(), sort_individuals);
             
@@ -107,7 +104,7 @@ class Population {
         }
 
         /*
-        
+            This evaluate crossover and the mutation fr each individual
         */
         void generate() {
             for(int i = elite; i < popmax; ++i) {
@@ -133,12 +130,6 @@ class Population {
             for(int i = 0; i < popmax; ++i) {
                 individuals[i].fitness /= sum;
             } 
-        }
-
-        bool get_is_finish() {
-            if(best_individual.fitness >= PERFECT_SCORE)
-                return this->is_finish = true;
-            return false;
         }
 
         ~Population() {

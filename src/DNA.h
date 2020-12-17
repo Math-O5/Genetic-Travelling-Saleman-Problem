@@ -69,7 +69,7 @@ class DNA {
         /*
             This function calculate the score of this indi
         */
-        void calc_fitness(const vector<vector<double>> matrix_distance) {
+        void calc_fitness(const vector<vector<double>>& matrix_distance) {
             double fit = 0.0;
             double sum = 0.0;
 
