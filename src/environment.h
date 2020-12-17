@@ -6,7 +6,7 @@
 #define __ENV__
 #include <iostream>
 #include "population.h"
-#include "DNA.h"
+#include "individual.h"
 
 
 using namespace std;

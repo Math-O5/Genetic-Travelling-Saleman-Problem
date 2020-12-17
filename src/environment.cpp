@@ -11,6 +11,7 @@ const int MAX_N = 10;
 const int MAX_GEN = 100;
 const int POPULATION_SIZE = 10;
 const int ELITE_SIZE = 1;
+int ENABLE_OUTPUT = 0;
 
 /*
     Generate population
@@ -18,21 +19,86 @@ const int ELITE_SIZE = 1;
     parameters:
         matrix: Matrix of distances between the nodes
         mutation_rate: rate of mutation
-        popmax: max population
-        elite:
+        popmax: max size of population
+        elite: size of elite
 */
 Population create_population(const vector<vector<double>>& matrix, int popmax, int elite) {
     return Population(matrix, popmax, elite);
 }
 
 /*
-    Run : void
-    Paramets:
+    Print parameters of the individual
+*/
+void print_individual(Individual& individual) {
+        cout << "Best fitniss: " << individual.fitness << endl;
+        cout << "Distance: " << individual.distance << endl;
+        for(int j =0; j < individual.length; ++j)
+            cout << individual.genes[j] << ' ';
+        cout << endl;
+}
 
+/* 
+    Print tour of all population
+*/
+void print_all_tours(Population& population) {
+    for(int i = 0; i < POPULATION_SIZE; ++i)
+        for(int j = 0; j < population.individuals[i].length; ++j) {
+            cout << population.individuals[i].genes[j] << ' ';
+        }
+        cout << endl;     
+}
+
+void env_life(const vector<vector<double>>& matrix, Population& population) {
+    
+    // Generation actual
+    int i = 0;
+
+    while(i < MAX_GEN) {
+        if(ENABLE_OUTPUT)
+            cout << "Generation: " << population.generation << endl;
+        
+        if(ENABLE_OUTPUT)
+            cout << "Calculate fitness\n";
+
+        // Classification: calculate all scores
+        population.calc_fitness();
+
+        if(ENABLE_OUTPUT)
+            cout << "Selection the best crew\n";
+    
+        // Select actual population
+        population.selection();
+
+
+        // Show the best individual
+        if(ENABLE_OUTPUT)
+            print_individual(population.best_individual);
+
+        // Reproduction of new life, called also sex
+        population.generate();
+        
+        if(ENABLE_OUTPUT)
+            cout << "Population sucessiful crossovered\n";
+
+        population.evolutionary_reversal();
+        
+        if(ENABLE_OUTPUT)
+            cout << "Evolutionry Reversal" << endl;
+
+        i += 1;
+    }
+}
+
+/*  
+    This function create the environment for algorithm evolution
+
+    Steps:
+        Create the distance matrix
+        Create the population
+        Call algorithm evolution for population
+        Clear memory
 */
 void env_run() {
-    
-    int i = 0;
 
     // Load matrix
     vector<vector<double>> matrix = load_distance_matrix();
@@ -40,28 +106,8 @@ void env_run() {
     // Create population initial
     Population population = create_population(matrix, POPULATION_SIZE, ELITE_SIZE);
 
-    while(i < MAX_GEN) {
-        cout << "Generation: " << population.generation << endl;
-        cout << "Calculate fitness\n";
-        
-        // Classification: calculate all scores
-        population.calc_fitness();
-
-        cout << "Evaluate the best crew\n";
-        // Select actual population
-        population.selection();
-        cout << "Best fitniss: " << population.best_individual.fitness << endl;
-        for(int j =0; j < population.best_individual.length; ++j)
-            cout << population.best_individual.genes[j] << ' ';
-        cout << endl;
-        cout << "Distance: " << population.best_individual.distance << endl;
-
-        // Reproduction of new life, called also sex
-        population.generate();
-        cout << "Population sucessiful crossovered\n";
-
-        i += 1;
-    }
+    // Run evolution algoritm on this population
+    env_life(matrix, population);
 
     // Clear matrix
     for(int i = 0; i < 10; ++i)

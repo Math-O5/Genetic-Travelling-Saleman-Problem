@@ -1,6 +1,6 @@
 #ifndef POPULATION_H
 #define POPULATION_H
-#include "DNA.h"
+#include "individual.h"
 #include<string>
 #include<vector>   
 #include <algorithm> // swap
@@ -10,19 +10,24 @@ using namespace std;
 const double PERFECT_SCORE = 1;
 
 /*
-    Population is a collection of elements
-    Element or DNA is a collection of genes
-
-    distance_matrix -> optimal solution for the element
-
+    Population is a collection of individuals
 */
 class Population {
     public:
-        vector<vector<double>> distance_matrix;             
+        // Distances between cities
+        vector<vector<double>> distance_matrix; 
+
+        // Average fitness and MAX fitness of the actual population            
         double fitness_avg, fitness_max;
+
+        // Max population, generation actual and the size of elite
         int popmax, generation, elite;  
-        DNA best_individual;            // best individual at moment
-        vector<DNA> individuals;        // actual generation
+
+        // Store the best individual from all populations
+        Individual best_individual;
+
+        // Actual population: collection of individuals
+        vector<Individual> individuals;      
 
         Population(const vector<vector<double>>& distance_matrix, int popmax, int elite) {
                 this->start_clock();
@@ -31,31 +36,29 @@ class Population {
                 this->elite = elite;
                 generation = 0;
                 for(int i = 0; i < popmax; ++i) {
-                    individuals.push_back(DNA((int)distance_matrix.size()));
+                    individuals.push_back(Individual((int)distance_matrix.size()));
                 }
         }
 
-        /* initialize random seed: */
+        /* 
+            Initialize random seed
+        */
         void start_clock() {
             srand (time(NULL));
         }
 
-        // Compare individual by fitness function compare
-        bool static sort_individuals(const DNA& ind_a, const DNA& ind_b) {
+        /*
+            Compare individual by fitness function compare
+        */
+        bool static sort_individuals(const Individual& ind_a, const Individual& ind_b) {
             return (ind_a.fitness > ind_b.fitness);
         }
 
-        // random generator function:
+        /*
+            Random generator function:
+        */
         int random_number(int i) { 
             return rand()%i;
-        }
-
-        /* Print fitness */
-        void print_fitness() {
-            cout << "Fits: ";
-            for(int i = 0; i < popmax; ++i)
-                cout << individuals[i].fitness << ' ';
-            cout << endl;
         }
 
         /*
@@ -70,8 +73,9 @@ class Population {
         }
 
         /* 
-            Select individuals with more fitness most likely to survive
-            Save the best invidividual
+            Select calculate the fitness which tell which is the most likely to survive
+
+            This also save the best invidividual until now
         */
         void selection() {
 
@@ -79,10 +83,6 @@ class Population {
 
             // Sum all fitness 
             for(int i = 0; i < popmax; ++i) {
-                // for(int j = 0; j < this->individuals[i].length; ++j) {
-                //     cout << this->individuals[i].genes[j] << ' ';
-                // }
-                // cout << endl;              
                 sum_fitness += this->individuals[i].fitness;
             }
 
@@ -97,10 +97,11 @@ class Population {
 
             // Check if there is a new best individual
             if(individuals[0].fitness > this->best_individual.fitness)
-                this->best_individual = DNA(individuals[0]);
+                this->best_individual = Individual(individuals[0]);
 
-            // Change two of elite for two individual with poor fitness
-            tournament_of_two();
+            // Change one individual of elite for one individual with poor fitness
+            if(this->elite > 2)
+                tournament_of_two();
         }
 
         /*
@@ -109,7 +110,7 @@ class Population {
         void generate() {
             for(int i = elite; i < popmax; ++i) {
                 int elite_index = (int)(rand() % elite);
-                DNA child = DNA(this->individuals[i].crossover(this->individuals[elite_index]));
+                Individual child = Individual(this->individuals[i].crossover(this->individuals[elite_index]));
                 child.mutate(this->fitness_avg, this->fitness_max);
                 this->individuals[i] = child;
             }
@@ -118,6 +119,8 @@ class Population {
 
         // Calculate fitness for every individual
         void calc_fitness() {  
+
+            // Acumulate the sum of all fitness
             double sum = 0.0;
 
             // Evaluate fitness as fit = 1 / d
@@ -130,6 +133,24 @@ class Population {
             for(int i = 0; i < popmax; ++i) {
                 individuals[i].fitness /= sum;
             } 
+        }
+
+        /*
+            Switch two ramdomly position in the tour for each individual
+
+            This function aim improve local search
+        */
+        void evolutionary_reversal() {
+            int rand_number_one; 
+            int rand_number_two;
+
+            for(int i = 0; i < this->popmax; ++i) {
+                rand_number_one = random_number(this->popmax);
+                rand_number_two = random_number(this->popmax);
+                swap(this->individuals[i].genes[rand_number_one], 
+                        this->individuals[i].genes[rand_number_two]);
+            }
+            
         }
 
         ~Population() {
