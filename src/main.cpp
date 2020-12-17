@@ -6,7 +6,7 @@
 
 int main() {
     
-    // Run population
+    // Run environment
     env_run();
     
     return 0;
