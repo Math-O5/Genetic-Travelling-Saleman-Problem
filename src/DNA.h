@@ -1,14 +1,16 @@
 #ifndef DNA_H
 #define DNA_H
 
-#include<string>
-#include<vector>
-#include<stdlib.h>     /* srand, rand */
-#include<time.h>       /* time */
-#include<iostream>
-#include<math.h>
-#include<algorithm>    // std::random_shuffle
-#include<set>
+#include <set>
+#include <time.h>       /* time */
+#include <string>
+#include <vector>
+#include <math.h>
+#include <fstream>
+#include <iostream>
+#include <stdlib.h>     /* srand, rand */
+#include <algorithm>    // std::random_shuffle
+
 
 using namespace std;
 

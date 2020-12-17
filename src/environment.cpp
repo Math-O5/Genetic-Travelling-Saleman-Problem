@@ -71,18 +71,37 @@ void env_run() {
 /**/
 vector<vector<double>> load_distance_matrix() {
     vector<vector<double>> matrix(MAX_N, vector<double>(MAX_N));
+    vector<pair<double,double>> pos;
+    double n, x, y;
+    string path, filename;
 
-    for(int i = 0; i < 10; ++i) {
-        vector<double> row;
-        for(int j = i; j < 10; ++j) {
-            if(i != j) {
-                matrix[i][j] = i + 1;
-                matrix[j][i] = i + 1;
-            }
-            else matrix[i][j] = MAX_N*10;
+    path = "../data/";
+    cin >> filename;
+
+    fstream my_file;
+    my_file.open(path + filename, ios::in);
+    my_file >> n;
+
+    while(!my_file.eof()){
+        for (int i = 0; i < n; i++){
+            my_file >> x >> y;
+            pos.push_back(make_pair(x, y));
         }
     }
 
-    // read matrix
+    my_file.close();
+
+    for(int i = 0; i < n; i++){
+        for(int j = i; j < n; j++){
+            if(i == j) matrix[i][i] = -1;
+            else{
+                double dist = sqrt(pow(pos[i].first - pos[j].first, 2) + pow(pos[i].second - pos[j].second, 2));
+                matrix[i][j] = dist;
+                matrix[j][i] = dist;
+            }
+            
+        }
+    }
+
     return matrix;
 }
