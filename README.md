@@ -6,7 +6,7 @@ Este problema consiste em encontrar a menor rota(tour) que visite todas cidades 
 
 ## Execução
 
-Compile com: ```g++ g++ src/environment.cpp src/main.cpp -o gtsp``` e execute com ```./gtsp```
+Compile com: ```g++ src/environment.cpp src/main.cpp -o gtsp``` e execute com ```./gtsp```
 
 ## Soluçãp
 A solução proposta aqui é a implementação de um algoritmo evolutivo, baseiado na teoria da evolução, em que individuos mais adaptados possuem mais probabilidade para sobreviverem. Esse algoritmo gerará uma heuristica que buscará a resposta certa usando dos individuos que mais se aproximarem de um caminho curto, sem sub-ciclos, descartando os piores e gerando novos.  
@@ -39,9 +39,11 @@ Note que o ultimo index (i + 1) % n corresponde ao caso de quando (i + 1) = (n +
 
 ## Autores
 
-<a href="https://github.com/Math-O5">Mathias Fernandes (Math-O5)</a> 
+<a href="https://github.com/AlbertWolf99">Alberto Neves (AlbertWolf99)</a> 
 
-<a href="https://github.com/AlbertWolf99">Alberto Wolf (Alberto99)</a> 
+<a href="https://github.com/">Marcus Para (???)</a>
+
+<a href="https://github.com/Math-O5">Mathias Fernandes (Math-O5)</a>
 
 ## Agradecimentos
 
