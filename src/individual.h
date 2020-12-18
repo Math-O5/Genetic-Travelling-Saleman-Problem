@@ -15,7 +15,7 @@ using namespace std;
 
 const int ENABLE_OUTPUT = 1;
 
-const double P_MAX = 0.10;
+const double P_MAX = 0.05;
 const double P_MIN = 0.01;
 
 /*
@@ -28,7 +28,7 @@ class Individual {
         std::vector<int> genes; 
 
         // The rank of the individual and the distance of this tour
-        double fitness, distance;
+        double fitness, distance, prob_fit;
 
         // Length of genes(tour)
         int length;
@@ -37,17 +37,20 @@ class Individual {
             fitness = -1;
             length = 0;
             distance = 0; 
+            prob_fit = 0;
         };
 
         Individual(const Individual& Individual) {
             this->genes = Individual.genes;
             this->fitness = Individual.fitness;
+            this->prob_fit = Individual.prob_fit;
             this->length = Individual.length;
             this->distance = Individual.distance;
         };
 
         Individual(int length) {
             this->fitness = 0;
+            this->prob_fit = 0;
             this->distance = -1; // no defined
             this->genes = new_tour(length);
             this->length = length;
@@ -136,7 +139,12 @@ class Individual {
         */
         void mutate(const double& fitness_avg, const double& fitness_max) {
             for(int i = 0; i < genes.size(); ++i) {
-                double p = P_MAX * (P_MAX - P_MIN) * (fitness - fitness_avg) / (fitness_max - fitness_avg);
+                double p = 0;
+                if(this->fitness >= fitness_max)
+                    p = P_MAX * (P_MAX - P_MIN) * (fitness - fitness_avg) / (fitness_max - fitness_avg);
+                else 
+                    p = P_MAX; 
+
                 if (rand()/(double)RAND_MAX >=  p) {
                      int n1 = rand() % length,
                          n2 = rand() % length; 

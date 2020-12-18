@@ -9,9 +9,9 @@ using namespace std;
 
 /* Global definitions */
 int N;
-const int MAX_GEN = 1000;
-const int POPULATION_SIZE = 1000;
-const int ELITE_SIZE = 0.3*POPULATION_SIZE;
+const int MAX_GEN = 500;
+const int POPULATION_SIZE = 200000;
+const int ELITE_SIZE = 1;
 
 
 /*

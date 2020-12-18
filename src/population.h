@@ -80,7 +80,7 @@ class Population {
             This function ramdom swicth on elite individual with an elite one.
         */
         void tournament_of_two() {
-            for(int i = 0; i < 5; ++i) {
+            for(int i = 0; i < 2; ++i) {
                 int falling = (int)(rand() % this->elite);
                 int rising =  (int)(rand() % (this->popmax-this->elite)) + this->elite - 1;
                 // cout << "falling " << falling << " rsising" << rising << endl;
@@ -115,8 +115,6 @@ class Population {
             if(individuals[0].fitness > this->best_individual.fitness)
                 this->best_individual = Individual(individuals[0]);
 
-            cout << this->individuals.size() << endl;
-
             // Change one individual of elite for one individual with poor fitness
             if(this->elite > 2)
                 tournament_of_two();
@@ -148,7 +146,7 @@ class Population {
             } 
             // Normalize with fit/total fit 
             for(int i = 0; i < popmax; ++i) {
-                individuals[i].fitness /= sum;
+                individuals[i].prob_fit /= sum;
             } 
         }
 
@@ -167,7 +165,6 @@ class Population {
                 swap(this->individuals[i].genes[rand_number_one], 
                     this->individuals[i].genes[rand_number_two]);
             }
-            
         }
 
         ~Population() {
