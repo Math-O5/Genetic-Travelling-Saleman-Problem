@@ -31,7 +31,7 @@ A população é inicializada com a geração de indivíduos aleatórios, onde c
 
 A cada geração, os indivíduos devem ser avaliados e possuir um fitness: um valor que representa o quão bom é um indivíduo. No caso, quanto menor a função objetivo quando aplicada em um indivíduo maior será o fitness. A função utilizada para avaliar os indivíduos é simplesmente o inverso da função objetivo.
 	
-	<a href="https://www.codecogs.com/eqnedit.php?latex=F_d&space;=&space;1/T_d" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F_d&space;=&space;1/T_d" title="F_d = 1/T_d" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=F_d&space;=&space;1/T_d" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F_d&space;=&space;1/T_d" title="F_d = 1/T_d" /></a>
 
 ## Seleção
 
