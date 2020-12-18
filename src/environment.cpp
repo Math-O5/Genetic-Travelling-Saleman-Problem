@@ -47,7 +47,10 @@ void print_all_tours(Population& population) {
 
 void env_life(const vector<vector<double>>& matrix, Population& population) {
     ofstream plot_file("plot.txt");
+    ofstream plot_avg_file("plot_avg.txt");
     FILE* ponteirognuplot = NULL;
+    FILE* avg_gnuplot = NULL;
+    
     if (ENABLE_GNUPLOT) {
         ponteirognuplot=popen("gnuplot -persist","w");
     }
@@ -67,6 +70,7 @@ void env_life(const vector<vector<double>>& matrix, Population& population) {
 
         if (ENABLE_GNUPLOT) {
             plot_file << population.best_individual.distance << endl;
+            plot_avg_file << population.fitness_avg << endl;
         }
 
         if(ENABLE_OUTPUT)
@@ -83,20 +87,21 @@ void env_life(const vector<vector<double>>& matrix, Population& population) {
         if(ENABLE_OUTPUT)
             cout << "Population sucessiful crossovered\n";
 
-        population.evolutionary_reversal();
+        //population.evolutionary_reversal();
         if(ENABLE_OUTPUT)
             cout << "Evolutionry Reversal" << endl;
 
         i += 1;
     }
 
-    if(PLOT) {
+    // if(PLOT) {
         // save route in file
-        system("python3 plot.py << " + ROUTE_FILE_NAME);
-    }
+        // system("python3 plot.py << " + ROUTE_FILE_NAME);
+    // }
 
     if (ENABLE_GNUPLOT) {
         fprintf(ponteirognuplot, "plot 'plot.txt'\n");
+        fprintf(avg_gnuplot, "plot 'plot_avg.txt'\n");
         fclose(ponteirognuplot);
     }
     

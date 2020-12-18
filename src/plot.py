@@ -7,16 +7,17 @@ import csv
 def read_route():
     route = str(input())
     tour = []
-    for line in route.split(','):
-        edge = []
-        for city in line:
-            edge.append(city)
+    edge = []
+    for city in route.split(','):
+        if(city != '\r'):
+            edge.append(int(city))
             if(len(edge) == 2):
-                tour.append(edge)
+                tour.append(edge.copy())
                 edge.pop(0)
-        edge.append(line[0])
-        tour.append(edge)
+    edge.append(int(route.split(',')[0]))
+    tour.append(edge.copy())
     return list(tour)
+
 
 def route_csv(route, coord_filename, route_filename, id_coord_start = 1):
     '''
@@ -56,6 +57,7 @@ def route_csv(route, coord_filename, route_filename, id_coord_start = 1):
                              'x_j': coord[str(r[1] + id_coord_start)]['x'],
                              'y_j': coord[str(r[1] + id_coord_start)]['y']})
         
+     
         
 def plot(route_filename, img_filename, background=False, background_img='./images/backgrounds/galaxy_image.jpg', background_extent=[0, 1920, 0, 1080]):
     '''
@@ -105,5 +107,5 @@ def plot(route_filename, img_filename, background=False, background_img='./image
 
         plt.savefig(img_filename, transparent=True)
 
-route_csv(read_route(), '../data/coord/', '../output/test1.csv')
-plot('../output/test1.csv', 'plot')
+route_csv(read_route(), '../coord/test30.csv', '../output/test1.csv')
+# plot('../output/test1.csv', 'plot')

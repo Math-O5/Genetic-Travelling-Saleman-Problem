@@ -6,11 +6,14 @@
 #define ENABLE_GNUPLOT 1
 #define GNUPLOT "gnuplot -persist"
 #define PLOT 1
-string ROUTE_FILE_NAME =  "../output/test1.txt";
+#define ENABLE_AVGPLOT 1
+#define AVGPLOT "gnuplot -persist"
+
+// std::string ROUTE_FILE_NAME =  "../output/test1.txt";
 
 /* Global definitions */
-const int MAX_GEN = 100;
-const int POPULATION_SIZE = 10000;
+const int MAX_GEN = 500;
+const int POPULATION_SIZE = 50000;
 const int ELITE_SIZE = 0.1*POPULATION_SIZE;
 const double PERFECT_SCORE = 1;
 const int ENABLE_OUTPUT = 1;
