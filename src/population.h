@@ -115,6 +115,11 @@ class Population {
             if(individuals[0].fitness > this->best_individual.fitness)
                 this->best_individual = Individual(individuals[0]);
 
+<<<<<<< HEAD
+=======
+            // cout << this->individuals.size() << endl;
+
+>>>>>>> 893a69dfe8a19bedbada93c8ee72c186e80da166
             // Change one individual of elite for one individual with poor fitness
             if(this->elite > 2)
                 tournament_of_two();
