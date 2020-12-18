@@ -7,14 +7,7 @@
 
 using namespace std;
 
-/* Global definitions */
 int N;
-
-
-const int MAX_GEN = 500000;
-const int POPULATION_SIZE = 10000;
-const int ELITE_SIZE = 0.3*POPULATION_SIZE;
-
 
 /*
     Generate population

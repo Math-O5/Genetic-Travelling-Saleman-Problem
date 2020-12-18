@@ -10,13 +10,9 @@
 #include <iostream>
 #include <stdlib.h>     /* srand, rand */
 #include <algorithm>    // std::random_shuffle
+#include "config.h"
 
 using namespace std;
-
-const int ENABLE_OUTPUT = 1;
-
-const double P_MAX = 0.05;
-const double P_MIN = 0.01;
 
 /*
     Individual is a collection genes.

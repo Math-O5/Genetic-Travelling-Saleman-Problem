@@ -7,7 +7,6 @@
 
 using namespace std;
 
-const double PERFECT_SCORE = 1;
 
 /*
     Population is a collection of individuals
