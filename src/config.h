@@ -1,10 +1,12 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+#include <string>
+
 #define ENABLE_GNUPLOT 1
 #define GNUPLOT "gnuplot -persist"
 #define PLOT 1
-#define ROUTE_FILE "../output/test1.txt"
+string ROUTE_FILE_NAME =  "../output/test1.txt";
 
 /* Global definitions */
 const int MAX_GEN = 100;

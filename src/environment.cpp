@@ -92,7 +92,7 @@ void env_life(const vector<vector<double>>& matrix, Population& population) {
 
     if(PLOT) {
         // save route in file
-        system("python3 plot.py");
+        system("python3 plot.py << " + ROUTE_FILE_NAME);
     }
 
     if (ENABLE_GNUPLOT) {

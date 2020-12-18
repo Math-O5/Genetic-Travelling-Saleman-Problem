@@ -5,11 +5,18 @@ import matplotlib.pyplot as plt
 import csv
 
 def read_route():
-    with open(ROUTE_FILE_NAME, 'r', encoding='utf-8') as tour_file:
-        reader = tour_file.readlines()
-        tour = []
-        for line in reader:
-            line = line.split() 
+    route = str(input())
+    tour = []
+    for line in route.split(','):
+        edge = []
+        for city in line:
+            edge.append(city)
+            if(len(edge) == 2):
+                tour.append(edge)
+                edge.pop(0)
+        edge.append(line[0])
+        tour.append(edge)
+    return list(tour)
 
 def route_csv(route, coord_filename, route_filename, id_coord_start = 1):
     '''
@@ -98,4 +105,5 @@ def plot(route_filename, img_filename, background=False, background_img='./image
 
         plt.savefig(img_filename, transparent=True)
 
-route_csv()
+route_csv(read_route(), '../data/coord/', '../output/test1.csv')
+plot('../output/test1.csv', 'plot')
