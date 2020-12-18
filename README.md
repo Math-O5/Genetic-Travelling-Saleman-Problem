@@ -46,6 +46,15 @@ Note que o ultimo index (i + 1) % n corresponde ao caso de quando (i + 1) = (n +
 
 ## Resultados 
 
+- **Teste 30 (30 pontos):**
+MAX_GEN: 500000
+POPULATION_SIZE: 1000000
+Best fitness: 0.00136406
+Distance: 733.105
+Route: 26 24 25 23 16 17 30 5 6 2 14 8 21 10 20 7 11 1 18 3 4 12 13 22 9 19 15 27 29 28
+Best Distance: 426.610
+Best Route: 26 25 24 15 14 8 7 10 21 20 19 11 9 18 3 2 1 6 5 4 13 12 30 23 22 17 16 28 27 29
+
 ## Autores
 
 <a href="https://github.com/AlbertWolf99">Alberto Neves (AlbertWolf99)</a> 
