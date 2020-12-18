@@ -41,7 +41,7 @@ Note que o ultimo index (i + 1) % n corresponde ao caso de quando (i + 1) = (n +
 
 <a href="https://github.com/AlbertWolf99">Alberto Neves (AlbertWolf99)</a> 
 
-<a href="https://github.com/">Marcus Para (???)</a>
+<a href="https://github.com/MarcusMedeiros99">Marcus Medeiros (MarcusMedeiros99)</a>
 
 <a href="https://github.com/Math-O5">Mathias Fernandes (Math-O5)</a>
 
