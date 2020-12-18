@@ -4,6 +4,4 @@
 #define ENABLE_GNUPLOT 1
 #define GNUPLOT "gnuplot -persist"
 
-
-
 #endif
