@@ -3,15 +3,16 @@
     reference: https://aip.scitation.org/doi/pdf/10.1063/1.5039131
 */
 #include "environment.h"
+#include <iostream>
 
 using namespace std;
 
 /* Global definitions */
 int N;
-const int MAX_GEN = 100;
-const int POPULATION_SIZE = 10;
-const int ELITE_SIZE = 1;
-int ENABLE_OUTPUT = 0;
+const int MAX_GEN = 1000;
+const int POPULATION_SIZE = 1000;
+const int ELITE_SIZE = 0.3*POPULATION_SIZE;
+
 
 /*
     Generate population
@@ -30,7 +31,7 @@ Population create_population(const vector<vector<double>>& matrix, int popmax, i
     Print parameters of the individual
 */
 void print_individual(Individual& individual) {
-        cout << "Best fitniss: " << individual.fitness << endl;
+        cout << "Best fitness: " << individual.fitness << endl;
         cout << "Distance: " << individual.distance << endl;
         for(int j =0; j < individual.length; ++j)
             cout << individual.genes[j] << ' ';
@@ -59,29 +60,25 @@ void env_life(const vector<vector<double>>& matrix, Population& population) {
         
         if(ENABLE_OUTPUT)
             cout << "Calculate fitness\n";
-
+        
         // Classification: calculate all scores
         population.calc_fitness();
 
         if(ENABLE_OUTPUT)
             cout << "Selection the best crew\n";
     
-        // Select actual population
+        // Select current population
         population.selection();
-
-
         // Show the best individual
         if(ENABLE_OUTPUT)
             print_individual(population.best_individual);
-
+        
         // Reproduction of new life, called also sex
         population.generate();
-        
         if(ENABLE_OUTPUT)
             cout << "Population sucessiful crossovered\n";
 
         population.evolutionary_reversal();
-        
         if(ENABLE_OUTPUT)
             cout << "Evolutionry Reversal" << endl;
 
@@ -110,7 +107,7 @@ void env_run() {
     env_life(matrix, population);
 
     // Clear matrix
-    for(int i = 0; i < 10; ++i)
+    for(int i = 0; i < N; ++i)
         matrix[i].clear();
 }
 
@@ -119,12 +116,17 @@ vector<vector<double>> load_distance_matrix() {
     vector<pair<double,double>> pos;
     string path, filename, ext;
 
-    path = "../data/";
+    path = "./data/";
     cin >> filename;
     ext = ".txt";
 
     fstream my_file;
+    cout << path + filename + ext << endl;
     my_file.open(path + filename + ext, ios::in);
+    if (!my_file.is_open()) {
+        cout << "Failed to open file\n";
+        exit(1);
+    }
     my_file >> N;
 
     vector<vector<double>> matrix(N, vector<double>(N));
@@ -134,7 +136,7 @@ vector<vector<double>> load_distance_matrix() {
             my_file >> matrix[i][j]; 
         }
     }
-    
+  
     my_file.close();
 
     return matrix;

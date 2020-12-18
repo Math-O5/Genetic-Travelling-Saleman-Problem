@@ -11,10 +11,11 @@
 #include <stdlib.h>     /* srand, rand */
 #include <algorithm>    // std::random_shuffle
 
-
 using namespace std;
 
-const double P_MAX = 0.05;
+const int ENABLE_OUTPUT = 1;
+
+const double P_MAX = 0.10;
 const double P_MIN = 0.01;
 
 /*
@@ -89,7 +90,7 @@ class Individual {
             
             // Update distance and fitness 
             this->distance = sum;
-            this->fitness = 1 / (double)sum;
+            this->fitness = 1 / (double) sum;
         }
 
         /*

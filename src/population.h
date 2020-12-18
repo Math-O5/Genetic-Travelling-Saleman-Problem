@@ -1,8 +1,8 @@
 #ifndef POPULATION_H
 #define POPULATION_H
 #include "individual.h"
-#include<string>
-#include<vector>   
+#include <string>
+#include <vector>   
 #include <algorithm> // swap
 
 using namespace std;
@@ -27,7 +27,7 @@ class Population {
         Individual best_individual;
 
         // Actual population: collection of individuals
-        vector<Individual> individuals;      
+        vector<Individual> individuals;
 
         Population(const vector<vector<double>>& distance_matrix, int popmax, int elite) {
                 this->start_clock();
@@ -38,6 +38,15 @@ class Population {
                 for(int i = 0; i < popmax; ++i) {
                     individuals.push_back(Individual((int)distance_matrix.size()));
                 }
+                // if (ENABLE_OUTPUT) {
+                //     cout << this->popmax << endl;
+                //     for (auto v : distance_matrix) {
+                //         for (auto x : v) {
+                //         cout << x << " ";
+                //     }
+                //     cout << endl;
+                // }
+                // }
         }
 
         /* 
@@ -45,6 +54,12 @@ class Population {
         */
         void start_clock() {
             srand (time(NULL));
+        }
+
+        void swap(int i, int j) {
+            Individual aux = this->individuals[i];
+            this->individuals[i] = this->individuals[j];
+            this->individuals[j] = aux;
         }
 
         /*
@@ -65,10 +80,11 @@ class Population {
             This function ramdom swicth on elite individual with an elite one.
         */
         void tournament_of_two() {
-            for(int i = 0; i < 2; ++i) {
+            for(int i = 0; i < 5; ++i) {
                 int falling = (int)(rand() % this->elite);
-                int rising =  (int)(rand() % (this->popmax-this->elite)) + this->elite;
-                swap(this->individuals[falling], this->individuals[rising]);
+                int rising =  (int)(rand() % (this->popmax-this->elite)) + this->elite - 1;
+                // cout << "falling " << falling << " rsising" << rising << endl;
+                swap(falling, rising);
             }
         }
 
@@ -99,6 +115,8 @@ class Population {
             if(individuals[0].fitness > this->best_individual.fitness)
                 this->best_individual = Individual(individuals[0]);
 
+            cout << this->individuals.size() << endl;
+
             // Change one individual of elite for one individual with poor fitness
             if(this->elite > 2)
                 tournament_of_two();
@@ -128,7 +146,6 @@ class Population {
                 individuals[i].calc_fitness(distance_matrix);
                 sum += individuals[i].fitness;
             } 
-
             // Normalize with fit/total fit 
             for(int i = 0; i < popmax; ++i) {
                 individuals[i].fitness /= sum;
@@ -145,10 +162,10 @@ class Population {
             int rand_number_two;
 
             for(int i = 0; i < this->popmax; ++i) {
-                rand_number_one = random_number(this->popmax);
-                rand_number_two = random_number(this->popmax);
+                rand_number_one = random_number(this->individuals[i].length);
+                rand_number_two = random_number(this->individuals[i].length);
                 swap(this->individuals[i].genes[rand_number_one], 
-                        this->individuals[i].genes[rand_number_two]);
+                    this->individuals[i].genes[rand_number_two]);
             }
             
         }
