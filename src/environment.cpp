@@ -53,6 +53,7 @@ void env_life(const vector<vector<double>>& matrix, Population& population) {
     
     if (ENABLE_GNUPLOT) {
         ponteirognuplot=popen("gnuplot -persist","w");
+        avg_gnuplot=popen("gnuplot -persist","w");
     }
     
     // Generation actual
