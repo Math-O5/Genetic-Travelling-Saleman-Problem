@@ -9,9 +9,11 @@ using namespace std;
 
 /* Global definitions */
 int N;
-const int MAX_GEN = 5000;
-const int POPULATION_SIZE = 30000;
-const int ELITE_SIZE = 1;
+
+
+const int MAX_GEN = 500000;
+const int POPULATION_SIZE = 10000;
+const int ELITE_SIZE = 0.3*POPULATION_SIZE;
 
 
 /*
@@ -51,6 +53,11 @@ void print_all_tours(Population& population) {
 }
 
 void env_life(const vector<vector<double>>& matrix, Population& population) {
+    ofstream plot_file("plot.txt");
+    FILE* ponteirognuplot = NULL;
+    if (ENABLE_GNUPLOT) {
+        ponteirognuplot=popen("gnuplot -persist","w");
+    }
     
     // Generation actual
     int i = 0;
@@ -64,9 +71,11 @@ void env_life(const vector<vector<double>>& matrix, Population& population) {
         
         // Classification: calculate all scores
         population.calc_fitness();
-        
-        //print_all_tours(population);
-       
+
+        if (ENABLE_GNUPLOT) {
+            plot_file << population.best_individual.distance << endl;
+        }
+
         if(ENABLE_OUTPUT)
             cout << "Selection the best crew\n";
     
@@ -87,7 +96,12 @@ void env_life(const vector<vector<double>>& matrix, Population& population) {
 
         i += 1;
     }
-}
+    if (ENABLE_GNUPLOT) {
+        fprintf(ponteirognuplot, "plot 'plot.txt'\n");
+        fclose(ponteirognuplot);
+    }
+    
+}   
 
 /*  
     This function create the environment for algorithm evolution
