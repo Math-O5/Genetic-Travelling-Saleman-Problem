@@ -57,8 +57,8 @@ Onde Pmax e Pmin são parâmetros definidos.
 - PERFECT_SCORE:
 - ENABLE_OUTPUT: Assume 1, caso queira a impressão dos resultados de cada geração
 - GENERATE_ROUTE:
-- P_MAX:
-- P_MIN:
+- P_MAX:Probabilidade Máxima de Mutação
+- P_MIN:Probabilidade Mínima de Mutação
 
 ## Resultados 
 
@@ -113,7 +113,7 @@ Route: 26 24 25 23 16 17 30 5 6 2 14 8 21 10 20 7 11 1 18 3 4 12 13 22 9 19 15 2
 
 Best Distance: 426.610
 
-Best Route: 26 25 24 15 14 8 7 10 21 20 19 11 9 18 3 2 1 6 5 4 13 12 30 23 22 17 16 28 27 29
+Best Route: 1 6 5 4 13 12 30 23 22 17 16 28 27 29 26 25 24 15 14 8 7 10 21 20 19 11 9 18 3 2
 
 Best Distance Found: **NO**
 
