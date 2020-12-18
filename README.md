@@ -23,15 +23,31 @@ Portanto, queremos minimizar:
 
 Note que o ultimo index (i + 1) % n corresponde ao caso de quando (i + 1) = (n + 1), então (n + 1) % n = 1. Além disso, em um caso real não sabemos se atingimos a solução ótima
 
-## Iniciando População
+## Inicializando População
 
-## Função de fitness
+A população é inicializada com a geração de indivíduos aleatórios, onde cada indivíduo possui um vetor de genes que representam as cidades na ordem em que são visitadas. Assim, um indivíduo é uma permutação das cidades existentes no problema. É fácil notar que o tamanho de um indivíduo é igual à quantidade de cidades. O tamanho da população é a quantidade de indivíduos gerada e é um parâmetro definido, que deve ser escolhido. De maneira geral, quanto maior o tamanho do problema, maior deve ser o tamanho da população.
 
-## Seleção natural(?)
+## Cálculo do fitness
 
-## Crossover (Sexo)
+A cada geração, os indivíduos devem ser avaliados e possuir um fitness: um valor que representa o quão bom é um indivíduo. No caso, quanto menor a função objetivo quando aplicada em um indivíduo maior será o fitness. A função utilizada para avaliar os indivíduos é simplesmente o inverso da função objetivo.
+	
+	<a href="https://www.codecogs.com/eqnedit.php?latex=F_d&space;=&space;1/T_d" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F_d&space;=&space;1/T_d" title="F_d = 1/T_d" /></a>
+
+## Seleção
+
+A seleção é feita de acordo com o fitness dos indivíduos. Uma parcela da população é selecionada como sua elite. Esses indivíduos são os que possuem os maiores fitness da sua geração e são mantidos na próxima geração. Os demais indivíduos gerados no crossover entre indivíduos de dentro com indivíduos de fora da elite.
+
+## Crossover
+
+O crossover é a maneira que novos indivíduos são gerados a partir da geração anterior. No caso, o crossover é realizado sempre entre dois indivíduos. Dois pontos são selecionados aleatoriamente do primeiro indivíduo. O trecho entre esses dois pontos é inserido no filho. O restante dos genes do novo indivíduo vem do segundo indivíduo, desde que não estejam no trecho inserido anteriormente.
 
 ## Mutação 
+
+A mutação é uma técnica utilizada para manter a diversidade numa população. O seu objetivo é evitar que o algoritmo fique preso num máximo local. A mutação no problema abordado é feita trocando aleatoriamente duas cidades de posição na rota. A probabilidade de um gene ser trocado em um dado indivíduo é dada pela equação abaixo.
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=p&space;=&space;P_{MAX}&space;*&space;(P_{MAX}&space;-&space;P_{MIN})&space;*&space;(fitness&space;-&space;fitness_{avg})&space;/&space;(fitness_{max}&space;-&space;fitness_avg);" target="_blank"><img src="https://latex.codecogs.com/gif.latex?p&space;=&space;P_{MAX}&space;*&space;(P_{MAX}&space;-&space;P_{MIN})&space;*&space;(fitness&space;-&space;fitness_{avg})&space;/&space;(fitness_{max}&space;-&space;fitness_avg);" title="p = P_{MAX} * (P_{MAX} - P_{MIN}) * (fitness - fitness_{avg}) / (fitness_{max} - fitness_avg);" /></a>
+
+Onde Pmax e Pmin são parâmetros definidos.
 
 ## Parâmetros e escolhas
 
