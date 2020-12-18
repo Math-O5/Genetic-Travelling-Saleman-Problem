@@ -54,11 +54,9 @@ Onde Pmax e Pmin são parâmetros definidos.
 - MAX_GEN: Quantidade máxima de gerações.
 - POPULATION_SIZE: Tamanho da população utilizada.
 - ELITE_SIZE: Tamanho da população de Elite.
-- PERFECT_SCORE:
 - ENABLE_OUTPUT: Assume 1, caso queira a impressão dos resultados de cada geração
-- GENERATE_ROUTE:
-- P_MAX:Probabilidade Máxima de Mutação
-- P_MIN:Probabilidade Mínima de Mutação
+- P_MAX: Probabilidade Máxima de Mutação
+- P_MIN: Probabilidade Mínima de Mutação
 
 ## Resultados 
 
