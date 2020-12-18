@@ -9,8 +9,8 @@ using namespace std;
 
 /* Global definitions */
 int N;
-const int MAX_GEN = 500;
-const int POPULATION_SIZE = 200000;
+const int MAX_GEN = 5000;
+const int POPULATION_SIZE = 30000;
 const int ELITE_SIZE = 1;
 
 
@@ -42,11 +42,12 @@ void print_individual(Individual& individual) {
     Print tour of all population
 */
 void print_all_tours(Population& population) {
-    for(int i = 0; i < POPULATION_SIZE; ++i)
+    for(int i = 0; i < POPULATION_SIZE; ++i) {
         for(int j = 0; j < population.individuals[i].length; ++j) {
             cout << population.individuals[i].genes[j] << ' ';
         }
         cout << endl;     
+    }
 }
 
 void env_life(const vector<vector<double>>& matrix, Population& population) {
@@ -63,7 +64,9 @@ void env_life(const vector<vector<double>>& matrix, Population& population) {
         
         // Classification: calculate all scores
         population.calc_fitness();
-
+        
+        //print_all_tours(population);
+       
         if(ENABLE_OUTPUT)
             cout << "Selection the best crew\n";
     

@@ -13,7 +13,7 @@
 
 using namespace std;
 
-const int ENABLE_OUTPUT = 0;
+const int ENABLE_OUTPUT = 1;
 
 const double P_MAX = 0.05;
 const double P_MIN = 0.01;
@@ -144,7 +144,9 @@ class Individual {
                     p = P_MAX * (P_MAX - P_MIN) * (fitness - fitness_avg) / (fitness_max - fitness_avg);
                 else 
                     p = P_MAX; 
-
+                
+                // cout << rand()/(double)RAND_MAX << " >= " << p << " | ";
+                
                 if (rand()/(double)RAND_MAX >=  p) {
                      int n1 = rand() % length,
                          n2 = rand() % length; 
