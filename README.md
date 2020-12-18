@@ -31,7 +31,7 @@ A população é inicializada com a geração de indivíduos aleatórios, onde c
 
 A cada geração, os indivíduos devem ser avaliados e possuir um fitness: um valor que representa o quão bom é um indivíduo. No caso, quanto menor a função objetivo quando aplicada em um indivíduo maior será o fitness. A função utilizada para avaliar os indivíduos é simplesmente o inverso da função objetivo.
 	
-<a href="https://www.codecogs.com/eqnedit.php?latex=F_d&space;=&space;1/T_d" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F_d&space;=&space;1/T_d" title="F_d = 1/T_d" /></a>
+	<a href="https://www.codecogs.com/eqnedit.php?latex=F_d&space;=&space;1/T_d" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F_d&space;=&space;1/T_d" title="F_d = 1/T_d" /></a>
 
 ## Seleção
 
@@ -62,6 +62,43 @@ Onde Pmax e Pmin são parâmetros definidos.
 
 ## Resultados 
 
+- **Libra (6 pontos):**
+
+MAX_GEN: 100
+
+POPULATION_SIZE: 10
+
+Best fitness: 0.000801282
+
+Distance: 1248
+
+Route: 2 3 4 5 6 1
+
+Best Distance: 1248
+
+Best Route: 1 2 3 4 5 6
+
+Best Solution Found: **YES** (Generation 6)
+
+
+- **Orion (15 pontos):**
+
+MAX_GEN: 100
+
+POPULATION_SIZE: 100
+
+Best fitness: 0.000538793
+
+Distance: 1856
+
+Route: 2 3 5 13 4 14 15 11 12 10 9 8 6 7 1
+
+Best Distance: 1856
+
+Best Route: 1 2 3 5 13 4 14 15 11 12 10 9 8 6 7
+
+Best Solution Found: **YES** (Generation 72)
+
 - **Teste 30 (30 pontos):**
 
 MAX_GEN: 500000
@@ -79,24 +116,6 @@ Best Distance: 426.610
 Best Route: 26 25 24 15 14 8 7 10 21 20 19 11 9 18 3 2 1 6 5 4 13 12 30 23 22 17 16 28 27 29
 
 Best Distance Found: **NO**
-
-- **Libra (6 pontos):**
-
-MAX_GEN: 100
-
-POPULATION_SIZE: 10
-
-Best fitness: 0.000801282
-
-Distance: 1248
-
-Route: 2 3 4 5 6 1
-
-Best Distance: 1248
-
-Best Route: 2 3 4 5 6 1
-
-Best Solution Found: **YES** (Generation 6)
 
 ## Autores
 
