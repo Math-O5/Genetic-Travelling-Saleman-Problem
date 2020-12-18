@@ -89,6 +89,12 @@ void env_life(const vector<vector<double>>& matrix, Population& population) {
 
         i += 1;
     }
+
+    if(PLOT) {
+        // save route in file
+        system("python3 plot.py");
+    }
+
     if (ENABLE_GNUPLOT) {
         fprintf(ponteirognuplot, "plot 'plot.txt'\n");
         fclose(ponteirognuplot);
@@ -126,7 +132,7 @@ vector<vector<double>> load_distance_matrix() {
     vector<pair<double,double>> pos;
     string path, filename, ext;
 
-    path = "./data/";
+    path = "./data/matrix_distances/";
     cin >> filename;
     ext = ".txt";
 

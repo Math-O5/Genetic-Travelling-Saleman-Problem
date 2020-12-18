@@ -7,6 +7,7 @@
 #include <iostream>
 #include "population.h"
 #include "individual.h"
+#include <stdlib.h>
 
 using namespace std;
 

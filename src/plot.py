@@ -4,6 +4,13 @@ import matplotlib.pyplot as plt
 
 import csv
 
+def read_route():
+    with open(ROUTE_FILE_NAME, 'r', encoding='utf-8') as tour_file:
+        reader = tour_file.readlines()
+        tour = []
+        for line in reader:
+            line = line.split() 
+
 def route_csv(route, coord_filename, route_filename, id_coord_start = 1):
     '''
     Cria um arquivo csv de rotas. O cabecalho do arquivo criado sera 
@@ -90,3 +97,5 @@ def plot(route_filename, img_filename, background=False, background_img='./image
         plt.axis('off')
 
         plt.savefig(img_filename, transparent=True)
+
+route_csv()
