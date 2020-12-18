@@ -62,7 +62,25 @@ Best Distance: 426.610
 
 Best Route: 26 25 24 15 14 8 7 10 21 20 19 11 9 18 3 2 1 6 5 4 13 12 30 23 22 17 16 28 27 29
 
-Best Distance Found: NO
+Best Distance Found: **NO**
+
+- **Libra (6 pontos):**
+
+MAX_GEN: 100
+
+POPULATION_SIZE: 10
+
+Best fitness: 0.000801282
+
+Distance: 1248
+
+Route: 2 3 4 5 6 1
+
+Best Distance: 1248
+
+Best Route: 2 3 4 5 6 1
+
+Best Solution Found: **YES** (Generation 6)
 
 ## Autores
 
