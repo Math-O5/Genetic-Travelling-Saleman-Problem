@@ -13,7 +13,7 @@
 
 using namespace std;
 
-const int ENABLE_OUTPUT = 1;
+const int ENABLE_OUTPUT = 0;
 
 const double P_MAX = 0.10;
 const double P_MIN = 0.01;

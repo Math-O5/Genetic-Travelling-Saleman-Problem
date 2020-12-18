@@ -115,7 +115,7 @@ class Population {
             if(individuals[0].fitness > this->best_individual.fitness)
                 this->best_individual = Individual(individuals[0]);
 
-            cout << this->individuals.size() << endl;
+            // cout << this->individuals.size() << endl;
 
             // Change one individual of elite for one individual with poor fitness
             if(this->elite > 2)
