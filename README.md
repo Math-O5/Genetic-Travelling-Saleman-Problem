@@ -2,14 +2,14 @@
 GTSP improved
 
 ## O problema: TSP (O Caixeiro Viajante)
-Este problema consiste em encontrar a menor rota(tour) que visite todas cidades uma vez a partir de uma cidade inicial e termine nessa mesma cidade. Essa rota é descreve também um ciclo halmiltoniano simples. 
+Este problema consiste em encontrar a menor rota(tour) que visite todas cidades uma vez a partir de uma cidade inicial e termine nessa mesma cidade. Essa rota descreve também um ciclo halmiltoniano simples. 
 
 ## Execução
 
 Compile com: ```g++ src/environment.cpp src/main.cpp -o gtsp``` e execute com ```./gtsp```
 
-## Soluçãp
-A solução proposta aqui é a implementação de um algoritmo evolutivo, baseiado na teoria da evolução, em que individuos mais adaptados possuem mais probabilidade para sobreviverem. Esse algoritmo gerará uma heuristica que buscará a resposta certa usando dos individuos que mais se aproximarem de um caminho curto, sem sub-ciclos, descartando os piores e gerando novos.  
+## Solução
+A solução proposta aqui é a implementação de um algoritmo evolutivo, baseado na teoria da evolução, em que indivíduos mais adaptados possuem maior probabilidade de sobrevivência. Esse algoritmo gerará uma heuristica que buscará a resposta certa usando dos individuos que mais se aproximarem de um caminho curto, sem sub-ciclos, descartando os piores e gerando novos.  
 
 ## Descrição formal
 Cada cidade pode ser representada por um vértice V(i), e o custo de viajar entre duas cidades pela aresta D(V(i), V(j)). Temos n cidades e uma rota é descrita como P(X) = {V(1), V(2), ..., V(n)} e X = {1, 2, ..., n}. 
@@ -34,6 +34,15 @@ Note que o ultimo index (i + 1) % n corresponde ao caso de quando (i + 1) = (n +
 ## Mutação 
 
 ## Parâmetros e escolhas
+
+- MAX_GEN: Quantidade máxima de gerações.
+- POPULATION_SIZE: Tamanho da população utilizada.
+- ELITE_SIZE: Tamanho da população de Elite.
+- PERFECT_SCORE:
+- ENABLE_OUTPUT: Assume 1, caso queira a impressão dos resultados de cada geração
+- GENERATE_ROUTE:
+- P_MAX:
+- P_MIN:
 
 ## Resultados 
 
