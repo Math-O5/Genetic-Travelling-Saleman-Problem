@@ -85,21 +85,21 @@ Best Solution Found: **YES** (Generation 6)
 
 - **Orion (15 pontos):**
 
-MAX_GEN: 100
+MAX_GEN: 1000
 
-POPULATION_SIZE: 100
+POPULATION_SIZE: 2000
 
-Best fitness: 0.000538793
+Best fitness: 0.000669792
 
-Distance: 1856
+Distance: 1493
 
-Route: 2 3 5 13 4 14 15 11 12 10 9 8 6 7 1
+Route: 9 8 10 11 12 14 13 15 2 3 1 4 5 6 7
 
-Best Distance: 1856
+Best Distance: 1194
 
 Best Route: 1 2 3 5 13 4 14 15 11 12 10 9 8 6 7
 
-Best Solution Found: **YES** (Generation 72)
+Best Solution Found: **NO** 
 
 - **Teste 30 (30 pontos):**
 
