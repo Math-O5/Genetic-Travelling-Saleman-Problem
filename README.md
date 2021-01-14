@@ -1,6 +1,9 @@
 # Genetic-Travelling-Saleman-Problem
 GTSP improved
 
+## Explicação em video
+<a href="https://drive.google.com/file/d/1JUU0hvx2tvSU-QnJq3MzZOHEcaWIJu_4/view">Apresentação GTSP<a/>
+
 ## O problema: TSP (O Caixeiro Viajante)
 Este problema consiste em encontrar a menor rota(tour) que visite todas cidades uma vez a partir de uma cidade inicial e termine nessa mesma cidade. Essa rota descreve também um ciclo halmiltoniano simples. 
 
