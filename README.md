@@ -49,6 +49,10 @@ A mutação é uma técnica utilizada para manter a diversidade numa população
 
 Onde Pmax e Pmin são parâmetros definidos.
 
+## Operação Evolucionária Reversa
+
+Após as etapas anteriores, dois vértices aleatórias do caminho encontrado trocam de posição um com o outro. Isso gera mais variação nas soluções e podeajudar a encontrar um caminho melhor.
+
 ## Parâmetros e escolhas
 
 - MAX_GEN: Quantidade máxima de gerações.
